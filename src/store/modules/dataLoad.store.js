@@ -148,10 +148,10 @@ const actions = {
         dataLoadApi.confirmCurrent({}, (response) => {
             bus.$emit('dataLoad/CONFIRMATION_FINISHED', false);
             if (response.data.error) {
-                tShow(i18n.t('data-load.confirm.error.unexpected'), 'danger');
+                tShow(i18n.t('data-load.confirm.error.unexpected')+":<br>"+response.data.data, 'danger');
             } else {
                 commit('SET_CURRENT_DATA_LOAD_INFO', {dataLoadInfo: response.data.data});
-                // commit('SET_PAGE_AND_PAGINATE', {page: 1});
+                commit('SET_PAGE_AND_PAGINATE', {page: 1});
                 tShow(i18n.t('data-load.confirm.success'), 'success');
             }
         }, (err) => {

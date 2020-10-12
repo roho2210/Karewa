@@ -135,7 +135,7 @@ DataLoadDetailSchema.statics.toContractObj = function (dataLoad, detailObj) {
 DataLoadDetailSchema.statics.toSuppliersArray = function (dataLoad, detailObj) {
     //Actual detail
     let detail = detailObj.data;
-    
+    // console.debug("Datos reales");
     if (detail.summary.hasErrors || detail.summary.skipRow) {
         return null;
     }

@@ -20,13 +20,13 @@ router.get('/list', securityController.checkPermission(Contract.permission, 'rea
  * POST /save
  * Guardar un registro
  */
-router.post('/save', securityController.checkPermission(Contract.permission, 'edit'), Contract.expressValidator(), contractController.save);
+router.post('/save', securityController.checkPermission(Contract.permission, 'edit'), contractController.save);
 
 /**
  * POST /save-updated-docs
  * Actualiza la información de varios registros
  */
-router.post('/save-updated-docs', securityController.checkPermission(Contract.permission, 'edit'), Contract.expressValidator(), contractController.saveUpdatedDocs);
+router.post('/save-updated-docs', securityController.checkPermission(Contract.permission, 'edit'), contractController.saveUpdatedDocs);
 
 
 /**

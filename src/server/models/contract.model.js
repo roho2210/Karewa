@@ -13,6 +13,22 @@ const logger = require('./../components/logger').instance;
 
 // const importLazy = require('import-lazy')(require);
 
+var valdateTotalOrMaxAmount = function() {
+    let contractId = "";
+    return {
+        validator: function (v) {
+            contractId = this.contractId
+            if (this.contractType == 'OPEN') {
+                return this.maxAmount ? this.maxAmount == v : true;
+            } else if (this.contractType == 'NORMAL') {
+                return this.totalAmount ? this.totalAmount == v : true;
+            }
+            return true;
+        },
+        message: props => `El valor del campo Monto total es incorrrecto. Por favor, verifica los montos y el tipo de contrato, ID del contrato: `+ contractId
+    }
+}
+
 const procedureTypesEnumDict = {
     'PUBLIC': [
         {
@@ -348,7 +364,7 @@ const CONTRACT_VALIDATION_REGEX_DICT = {
     PERIOD: "^[1234]o\\s2[0-9]{3}$",
     URL: "((https?|ftps?)://(?:www.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|www.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9].[^s]{2,}|(https?|ftps?)://(?:www.|(?!www))[a-zA-Z0-9]+.[^s]{2,}|www.[a-zA-Z0-9]+.[^s]{2,})",
 };
-
+let contract_working = '';
 let ContractSchema = new Schema({
 
     isEmpty : {
@@ -623,17 +639,7 @@ let ContractSchema = new Schema({
         required: [function(){
             return !this.isEmpty;
         }, "El campo Monto total o Máximo es requerido"],
-        validate: {
-            validator: function (v) {
-                if (this.contractType == 'OPEN') {
-                    return this.maxAmount ? this.maxAmount == v : true;
-                } else if (this.contractType == 'NORMAL') {
-                    return this.totalAmount ? this.totalAmount == v : true;
-                }
-                return true;
-            },
-            message: props => `El valor del campo Monto total es incorrrecto. Por favor, verifica los montos y el tipo de contrato`
-        }
+        validate: valdateTotalOrMaxAmount()
         // Si es NORMAL - es el monto total
         // Si es ABIERTO - es el monto máximo
     },
