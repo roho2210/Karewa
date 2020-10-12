@@ -24,6 +24,21 @@ const SUPPLIER_VALIDATION_REGEX_DICT = {
 
 };
 
+var optionalWithLength = function(minLength, maxLength) {
+    minLength = minLength || 0;
+    maxLength = maxLength || Infinity;
+    let rfc = "";
+    return {
+
+        validator : function(value) {
+            rfc = this.rfc;
+            if (value === undefined) return true;
+            return value.length >= minLength && value.length <= maxLength;
+        },
+        message :  props => 'El campo nombre de Organizacion debe tener caracteres como minimo: (' + minLength + ') y maximo: (' + maxLength + '), esta es la RFC: ' + rfc
+    }
+}
+
 /**
  * Schema de Mongoose para el modelo Supplier.
  * @type {mongoose.Schema}
@@ -32,17 +47,20 @@ let SupplierSchema = new Schema({
     organization: {
         type: Schema.Types.ObjectId,
         ref: 'Organization',
-        required: true
+        required: [true, "Falta la organización"]
     },
     name: {
         type: String,
-        required: true,
+        //required: [true, "Falta el nombre de la organización"],
         min: 2,
-        max: 100
+        max: 100,
+        validate: optionalWithLength(2, 100)
     },
     rfc: {
-        type: String/*,
-        required: true*/
+        type: String,
+        required: [true, "Falta la RFC"],
+        min: 2,
+        max: 100
     },
     notes: {
         type: String
@@ -86,7 +104,7 @@ SupplierSchema.statics.expressValidator = function() {
         //Some examples:
         // check('email').isEmail(),
         // check('type').isIn(allowedTypes),
-        // check('url').isUrl()
+        // check('name').isEmpty()
     ]
 };
 

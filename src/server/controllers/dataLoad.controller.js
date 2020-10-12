@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Supplier = require('./../models/supplier.model').Supplier;
 const ContractExcelReader = require('./../components/dataLoader').ContractExcelReader;
 const ContractExcelWriter = require('./../components/dataLoader').ContractExcelWriter;
 const DataLoad = require('./../models/dataLoad.model').DataLoad;
@@ -562,10 +562,9 @@ exports.cancelCurrent = (req, res, next) => {
 };
 
 exports.confirmCurrent = (req, res, next) => {
-
     let currentOrganizationId = Organization.currentOrganizationId(req);
     let currentUserId = req.user._id;
-    
+
     DataLoad
         .findOne({
             organization: currentOrganizationId,
@@ -596,14 +595,13 @@ exports.confirmCurrent = (req, res, next) => {
 
                     DataLoad.confirm(dataLoad, details, (err, confirmResults) => {
                         console.log('confirmResults', confirmResults);
-        
+
                         if (err) {
                             return res.json({
                                 error: true,
-                                data: null
+                                data: err.user_message ? err.user_message : "Existe un error en los datos del Excel"
                             });
                         }
-                        
                         DataLoad.dataLoadInfo(currentOrganizationId, (err, dataLoadInfo) => {
                             if (err) {
                                 logger.error(err, req, 'dataLoad.controller#currentInfo', 'Error trying to fetch current DataLoad info');
@@ -611,13 +609,6 @@ exports.confirmCurrent = (req, res, next) => {
                             
                             //To ensure no race conditions from reloading from the database, the current DataLoad is forced as undefined
                             dataLoadInfo.current = null;
-                            let notification = new Notification();
-                            notification.organization = currentOrganizationId;
-                            notification.createdUser = currentUserId;
-                            notification.message = req.__('data-load-notification.success');
-                            notification.status = 'green';
-                            notification.seenUsers.push(currentUserId);
-                            notification.save();
                             return res.json({
                                 error: false,
                                 data: dataLoadInfo

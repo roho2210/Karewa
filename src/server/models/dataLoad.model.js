@@ -126,7 +126,7 @@ DataLoadSchema.statics.getSummary = function (dataLoad, details) {
             if (!rowInfo.summary.hasErrors) {
                 newContractsCount++;
             }
-            
+
             if (rowInfo.supplierRfc && rowInfo.supplierRfc.shouldCreateDoc) {
                 if (!addedSuppliers[rowInfo.supplierRfc.value]) {
                     addedSuppliers[rowInfo.supplierRfc.value] = true;
@@ -250,7 +250,6 @@ DataLoadSchema.statics.dataLoadInfo = function (currentOrganizationId, callback)
 
 DataLoadSchema.statics.confirm = function (dataLoad, details, confirmCallback) {
     details = details || [];
-    
     async.map(details, (detail, callback) => {
         
         //TODO: Save Contact, Suppliers, AdministrativeUnits, etc
@@ -260,7 +259,6 @@ DataLoadSchema.statics.confirm = function (dataLoad, details, confirmCallback) {
             suppliers: DataLoadDetail.toSuppliersArray(dataLoad, detail),
             administrativeUnits: DataLoadDetail.toAdministrativeUnitsArray(dataLoad, detail)
         };
-        
         return callback(null, mappedValue);
     }, (err, mappedDetails) => {
         //Each mappedDetail has the form:
@@ -269,11 +267,11 @@ DataLoadSchema.statics.confirm = function (dataLoad, details, confirmCallback) {
         //     suppliersInfo: {detail: {...}, suppliers: [...]},
         //     administrativeUnitsInfo: {detail: {...}, administrativeUnits: [...]}
         // }
-
         async.waterfall([
             //Save all new Suppliers
             function (waterfallCallback) {
                 let seenSupplierNames = {};
+                let seenSupplierRfcs = {};
                 let suppliersArrayOfArrays = _.flatten(mappedDetails
                 //Filter only valid supplier arrays (defined and not empty)
                     .filter(detailObj => detailObj.suppliers && detailObj.suppliers.length)
@@ -284,12 +282,13 @@ DataLoadSchema.statics.confirm = function (dataLoad, details, confirmCallback) {
                 let supplierObjsToSave = suppliersArrayOfArrays
                     //Remove duplicates
                     .filter(supplier => {
-                        //Only if not already seen; do not duplicate Suppliers to save
-                        if (seenSupplierNames[supplier.name]) {
+                        // Only if not already seen; do not duplicate Suppliers to save
+                        if (seenSupplierNames[supplier.name] && seenSupplierRfcs[supplier.rfc]) {
                             return false;
                         } else {
                             //Mark as "seen"
                             seenSupplierNames[supplier.name] = true;
+                            seenSupplierRfcs[supplier.rfc] = true;
                             return true;
                         }
                     });
@@ -299,11 +298,23 @@ DataLoadSchema.statics.confirm = function (dataLoad, details, confirmCallback) {
                         if (err) {
                             logger.error(err, null, 'dataLoad.model#confirm', 'Error trying to save Suppliers on waterfall step #1');
                             //Stop waterfall right now
+                            if(err.code === 11000)
+                                err.user_message = "No coincide la rfc con el nombre de una Organización ya creada: " +
+                                    "<br> Nombre organizacion: "+ err.op.name +
+                                    "<br> RFC Organizacion: "+ err.op.rfc;
+                            else {
+                                if(err.errors) {
+                                    for(key in err.errors) {
+                                        err.user_message = " "+ ( err.errors[key].message ? err.errors[key].message : '' )
+                                    }
+                                } else
+                                    err.user_message = "Existe un error en los datos del Excel";
+                            }
+                                // err.user_message = err.errors ? err.errors.name.message : "Existe un error en los datos del Excel";
+
                             return waterfallCallback(err);
                         }
-
                         let suppliersMapIdByRfc = {};
-                        
                         if (!savedSuppliers || !savedSuppliers.length) {
                             logger.warn(err, null, 'dataLoad.model#confirm', 'No Suppliers saved on waterfall step #1');
                             return waterfallCallback(null, suppliersMapIdByRfc);
@@ -343,6 +354,13 @@ DataLoadSchema.statics.confirm = function (dataLoad, details, confirmCallback) {
                         if (err) {
                             logger.error(err, null, 'dataLoad.model#confirm', 'Error trying to save AdministrativeUnits on waterfall step #2');
                             //Stop waterfall right now
+                            if(err.errors) {
+                                for(key in err.errors) {
+                                    err.user_message = " "+ ( err.errors[key].message ? err.errors[key].message : '' )
+                                }
+                            } else
+                                err.user_message = "Existe un error en los datos del Excel";
+
                             return waterfallCallback(err);
                         }
 
@@ -415,6 +433,14 @@ DataLoadSchema.statics.confirm = function (dataLoad, details, confirmCallback) {
                         if (err) {
                             logger.error(err, null, 'dataLoad.model#confirm', 'Error trying to save Contracts on waterfall step #3');
                             //Stop waterfall right now
+
+                            if(err.errors) {
+                                for(key in err.errors) {
+                                    err.user_message = " "+ ( err.errors[key].message ? err.errors[key].message : '' )
+                                }
+                            } else
+                                err.user_message = "Existe un error en los datos del Excel";
+
                             return waterfallCallback(err);
                         }
 
@@ -437,6 +463,7 @@ DataLoadSchema.statics.confirm = function (dataLoad, details, confirmCallback) {
         ], (err, waterfallResults) => {
             //All details confirmed
             if (err) {
+
                 logger.error(err, null, 'dataLoad.model#confirm', 'Error trying to confirm DataLoad');
                 return confirmCallback(err);
             }
