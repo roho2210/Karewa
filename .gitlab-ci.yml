@@ -21,31 +21,31 @@ build:
     - master
     - tags
 
-heroku:
-  stage:           deploy
-  image:           docker:stable
-  extends:         .devops
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST:   tcp://docker:2375
-    DOCKER_DRIVER: overlay2
-    GIT_STRATEGY:  none
-  script:
-    - heroku_deploy
-  only:
-    - master
-
-prod:
-  stage:           deploy
-  image:           alpine
-  variables:
-    GIT_STRATEGY:  none
-  extends:         .devops
-  script:
-    - deploy_prod
-  only:
-    - tags
+#heroku:
+#  stage:           deploy
+#  image:           docker:stable
+#  extends:         .devops
+#  services:
+#    - docker:dind
+#  variables:
+#    DOCKER_HOST:   tcp://docker:2375
+#    DOCKER_DRIVER: overlay2
+#    GIT_STRATEGY:  none
+#  script:
+#    - heroku_deploy
+#  only:
+#    - master
+#
+#prod:
+#  stage:           deploy
+#  image:           alpine
+#  variables:
+#    GIT_STRATEGY:  none
+#  extends:         .devops
+#  script:
+#    - deploy_prod
+#  only:
+#    - tags
 
 
 .devops:
