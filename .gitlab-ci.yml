@@ -1,6 +1,6 @@
 stages:
   - release
-  - deploy
+#  - deploy
 
 build:
   stage:           release
