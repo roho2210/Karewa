@@ -67,7 +67,7 @@
                         <div class="checkbox">
                             <input type="checkbox" value="">
                             <i class="input-helper"></i>
-                            <span>Recuerdame</span>
+                            <span>¡Recuerdame!</span>
                         </div>
                     </div>
                     <div class="col-6 col-md-6 text-align-r">

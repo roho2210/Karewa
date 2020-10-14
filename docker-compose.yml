@@ -1,7 +1,7 @@
 version:         "3"
 services:
   app:
-    image:       registry.gitlab.com/karewa/monitor:$KAREWA_VERSION
+    image:       roho2210/karewa:latest
     ports:
       - "80:3000"
     environment:
