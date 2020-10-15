@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-6 col-md-6 text-align-r">
                         <router-link to="/forgot-password" class="f-13 c-accent f-bold">
-                            Olvide mi contraseña
+                            ¿Olvide mi contraseña?
                         </router-link>
                     </div>
                 </div>
