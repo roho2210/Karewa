@@ -35,7 +35,7 @@ var optionalWithLength = function(minLength, maxLength) {
             if (value === undefined) return true;
             return value.length >= minLength && value.length <= maxLength;
         },
-        message :  props => 'El campo nombre de Organizacion debe tener caracteres como minimo: (' + minLength + ') y maximo: (' + maxLength + '), esta es la RFC: ' + rfc
+        message :  props => 'El campo nombre de Proveedor debe tener caracteres como minimo: (' + minLength + ') y maximo: (' + maxLength + '), esta es la RFC: ' + rfc
     }
 }
 
