@@ -142,7 +142,7 @@
             <div class="neutral-width">
                 <div class="col-12 p-0">
                     <div class="floating-title-panel small">
-                        <h1> Adquisiciones, Arrendamientos, Contratación de Servicios y Obra Pública del Municipio de Chihuahua </h1>
+                        <h1> Adquisiciones, Arrendamientos, Contratación de Servicios y Obra Pública del Municipio</h1>
                     </div>
                 </div>
 
