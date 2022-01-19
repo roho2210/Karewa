@@ -30,7 +30,7 @@ module.exports = {
 
             .assert.visible(utils.xpath.elementWithPlaceholder("textarea", "Aquí podrás obtener información sobre los procedimientos de licitaciones para comparar la compra, renta y contratación de serviciosque se realizan en el Monitor Karewa."))
             .clearValue(utils.xpath.elementWithPlaceholder("textarea","Aquí podrás obtener información sobre los procedimientos de licitaciones para comparar la compra, renta y contratación de serviciosque se realizan en el Monitor Karewa."))
-            .setValue(utils.xpath.elementWithPlaceholder("textarea","Aquí podrás obtener información sobre los procedimientos de licitaciones para comparar la compra, renta y contratación de serviciosque se realizan en el Monitor Karewa."), "Aquí podras obtener información sobre los procedimientos de contrataciones públicas, incluyendo la compra, renta y contratación de servicios que se realizan en el Municipio de Chihuahua.")
+            .setValue(utils.xpath.elementWithPlaceholder("textarea","Aquí podrás obtener información sobre los procedimientos de licitaciones para comparar la compra, renta y contratación de serviciosque se realizan en el Monitor Karewa."), "Aquí podras obtener información sobre los procedimientos de contrataciones públicas, incluyendo la compra, renta y contratación de servicios que se realizan en el Municipio.")
 
             .pause(1000)
             .assert.visible(utils.xpath.elementWithText("a", "Guardar"))
