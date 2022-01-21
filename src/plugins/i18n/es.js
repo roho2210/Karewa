@@ -162,7 +162,7 @@ export default {
     "general.hello-world": "Hello world",
     "general.welcome-to": "Bienvenido a",
     "general.app.name": "Monitor Karewa",
-    "general.app.description": "Aquí podrás obtener información sobre los procedimientos de licitaciones para consultar la compra, renta y contratación de servicios que se realizan en el Municipio.",
+    "general.app.description": "Aquí podrás obtener información sobre los procedimientos de licitaciones para consultar la compra, renta y contratación de servicios que se realizan.",
     "general.app.name.html-strong": "Monitor <strong>Karewa</strong>",
     "general.back": "Atrás",
     "general.close": "Cerrar",
