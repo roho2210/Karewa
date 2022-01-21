@@ -98,8 +98,7 @@
                         <!--</div>-->
 
                         <p class="f-14 c-plain_text principal-font-regular">Aquí podrás encontrar la lista de todos los
-                            proveedores que han sido contratados por el
-                            <strong class="principal-font-semibold">Municipio</strong></p>
+                            proveedores que han sido contratados</p>
 
 
                         <!--filters-->
