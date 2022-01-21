@@ -70,7 +70,7 @@
                             </div>
                         </div>
 
-                        <p class="f-14 c-plain_text principal-font-regular">Aquí podrás encontrar la lista de todos los contratos que han sido firmados por el Municipio<br/>
+                        <p class="f-14 c-plain_text principal-font-regular">Aquí podrás encontrar la lista de todos los contratos que han sido firmados<br/>
                             Si quieres consultar los detalles de un contraro haz clic en “Ver más”.</p>
 
                         <!--filters-->
