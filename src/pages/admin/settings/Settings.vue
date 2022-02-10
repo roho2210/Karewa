@@ -399,7 +399,7 @@
                     'image/gif',
                 ],
                 defaultTitle: 'Monitor <strong>Karewa</strong>',
-                defaultDescription: 'Aquí podras obtener información sobre los procedimientos de contrataciones públicas, incluyendo la compra, renta y contratación de servicios que se realizan en el Municipio',
+                defaultDescription: 'Aquí podras obtener información sobre los procedimientos de contrataciones públicas, incluyendo la compra, renta y contratación de servicios que se realizan',
                 defaultWelcomeTitle: 'Bienvenido a '
             }
         },
