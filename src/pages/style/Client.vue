@@ -52,7 +52,7 @@
                         <h3>Bienvenido a</h3>
                         <h1>Monitor <strong>Karewa</strong></h1>
                         <div class="divider"></div>
-                        <p>Aquí podrás obtener información sobre los procedimientos de licitaciones para consultar la compra, renta y contratación de servicios que se realizan en el Municipio.</p>
+                        <p>Aquí podrás obtener información sobre los procedimientos de licitaciones para consultar la compra, renta y contratación de servicios que se realizan.</p>
 
                     </div>
                     <div class="horizontal-center m-t-50">
