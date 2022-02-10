@@ -15,13 +15,13 @@
                         <!--&lt;!&ndash;<h1>Monitor <strong>Karewa</strong></h1>&ndash;&gt;-->
                         <!--<h1 v-html="$t('general.app.name.html-strong')"></h1>-->
                         <!--<div class="divider"></div>-->
-                        <!--&lt;!&ndash;<p>Aquí podrás obtener información sobre los procedimientos de licitaciones para consultar la compra, renta y contratación de servicios que se realizan en el Municipio</p>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<p>Aquí podrás obtener información sobre los procedimientos de licitaciones para consultar la compra, renta y contratación de servicios que se realizan</p>&ndash;&gt;-->
                         <!--<p>{{$t('general.app.description')}}</p>-->
                         <h3 :class="currentOrganization.showBackgroundText != '' ? 'welcomeTitle' : ''" v-html="currentOrganization.welcomeTitle || defaultWelcomeTitle"></h3>
                         <!--<h1>Monitor <strong>Karewa</strong></h1>-->
                         <h1 :class="currentOrganization.showBackgroundText != '' ? 'title' : ''" v-html="currentOrganization.title || defaultTitle"></h1>
                         <div class="divider"></div>
-                        <!--<p>Aquí podrás obtener información sobre los procedimientos de licitaciones para consultar la compra, renta y contratación de servicios que se realizan en el Municipio</p>-->
+                        <!--<p>Aquí podrás obtener información sobre los procedimientos de licitaciones para consultar la compra, renta y contratación de servicios que se realizan</p>-->
                         <p :class="currentOrganization.showBackgroundText != '' ? 'description' : ''" v-html="currentOrganization.description || defaultDescription"></p>
 
                     </div>
@@ -113,7 +113,7 @@
                 chartsModules : chartsModules,
                 defaultRedirectTo: '/',
                 defaultTitle: 'Monitor <strong>Karewa</strong>',
-                defaultDescription: 'Aquí podras obtener información sobre los procedimientos de contrataciones públicas, incluyendo la compra, renta y contratación de servicios que se realizan en el Municipio',
+                defaultDescription: 'Aquí podras obtener información sobre los procedimientos de contrataciones públicas, incluyendo la compra, renta y contratación de servicios que se realizan',
                 defaultWelcomeTitle: 'Bienvenido a'
             }
         },
