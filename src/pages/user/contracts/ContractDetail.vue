@@ -81,7 +81,7 @@
                         <span> <small>Materia</small> <i>-</i> <strong>{{$t(contract.category)}}</strong></span>
                         <span> <small>Nombre del proveedor</small> <i>-</i> <strong>{{contract.supplier ? contract.supplier.name : ""}}</strong></span>
                         <!--<span> <small>RFC</small> <i>-</i> <strong>{{contract}}</strong></span>-->
-                        <span> <small>Notas de Municipio de Chihuahua</small> <i>-</i> <strong>{{contract.notes}}</strong></span>
+                        <span> <small>Notas</small> <i>-</i> <strong>{{contract.notes}}</strong></span>
                         <span> <small>Fecha de obtención de los datos</small> <i>-</i> <strong>{{contract.informationDate | date}}</strong></span>
                     </div>
                 </div>
