@@ -339,7 +339,7 @@
                             <span> <small>Materia</small> <i>-</i> <strong> Obra pública </strong></span>
                             <span> <small>Nombre del proveedor</small> <i>-</i> <strong> CONSTRUCCIONES MARRO SA DE CV </strong></span>
                             <span> <small>RFC</small> <i>-</i> <strong> GMA980529MWO </strong></span>
-                            <span> <small>Notas de Municipio de Chihuahua</small> <i>-</i> <strong> Hipervínculo acta de recepción física de trabajos : ESTA EN PROCESO. </strong></span>
+                            <span> <small>Notas</small> <i>-</i> <strong> Hipervínculo acta de recepción física de trabajos : ESTA EN PROCESO. </strong></span>
                             <span> <small>Fecha de obtención de los datos</small> <i>-</i> <strong> 13 de marzo de 2018 </strong></span>
                         </div>
                     </div>
